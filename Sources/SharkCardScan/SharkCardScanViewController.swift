@@ -15,8 +15,9 @@ public class SharkCardScanViewController: UIViewController {
     private var styling: CardScanStyling
     
     private lazy var closeButton = UIButton().with {
-        $0.setBackgroundImage(UIImage(named: "rounded close"), for: .normal)
+        $0.setBackgroundImage(viewModel.closeButtonIcon, for: .normal)
         $0.accessibilityLabel = String(describing: SharkCardScanViewController.self) + "." + "CloseButton"
+        $0.tintColor = viewModel.closeButtonTint
     }
     
     private let rootStackView = UIStackView().with { $0.axis = .vertical }
@@ -26,7 +27,7 @@ public class SharkCardScanViewController: UIViewController {
     }
     private lazy var cardView = ScannedCardView(styling: styling)
     private lazy var instructionsLabel = UILabel().withFixed(width: 288).with {
-        $0.text = viewModel.insturctionText
+        $0.text = viewModel.instructionText
         $0.font = styling.instructionLabelStyling.font
         $0.textColor = styling.instructionLabelStyling.color
         $0.textAlignment = .center
@@ -75,7 +76,7 @@ public class SharkCardScanViewController: UIViewController {
                         closeButton
                     ]}
                 ]},
-                UIView().with { $0.backgroundColor = .white }.withCenteredContent {[
+                UIView().with { $0.backgroundColor = styling.backgroundColor }.withCenteredContent {[
                     instructionsLabel
                 ]}
             ]}
